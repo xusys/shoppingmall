@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.demo.mapper.CartMapper">
+    <resultMap id="cartmap" type="com.demo.pojo.Cart">
+<!--        <result column="description" jdbcType="LONGVARCHAR" property="description" />-->
+    </resultMap>
+    <insert id="add" >
+        insert into cart(usersid,goodsid,price,quantity,goodsname,status)
+        values(#{usersid},#{goodsid},#{price},#{quantity},#{goodsname},0);
+    </insert>
+
+    <select id="selectAll" resultMap="cartmap">
+        select * from cart;
+    </select>
+    <select id="selectById"  resultMap="cartmap">
+        select * from cart where id =#{id};
+    </select>
+<!--    <select id="selectByCondition"  resultMap="goodsmap">-->
+<!--        SELECT * FROM Goods-->
+<!--        <where>-->
+<!--            <if test="name != null">-->
+<!--                name like #{name}-->
+<!--            </if>-->
+<!--            <if test="price != null">-->
+<!--                AND price like #{price}-->
+<!--            </if>-->
+<!--            <if test="id != null ">-->
+<!--                AND id like #{id}-->
+<!--            </if>-->
+<!--        </where>-->
+<!--    </select>-->
+    <select id="selectByCondition"  resultMap="cartmap">
+        SELECT * FROM Cart
+        <where>
+
+            <if test="usersid != 0">
+                usersid = #{usersid}
+            </if>
+
+                and status = 0
+
+
+        </where>
+    </select>
+    <select id="selectByUG" resultMap="cartmap">
+        SELECT * FROM Cart
+        <where>
+
+            <if test="usersid != 0">
+                usersid = #{usersid}
+            </if>
+            <if test="goodsid != 0">
+                and goodsid =#{goodsid}
+            </if>
+                 and status = 0
+        </where>
+    </select>
+    <select id="showhistory" resultMap="cartmap">
+        select * from Cart
+        where status=1
+    </select>
+    <select id="showuserhistory"  resultMap="cartmap">
+        select * from Cart
+        where status =1
+        and usersid=#{usersid}
+    </select>
+    <select id="showgoodshistory" resultMap="cartmap">
+        SELECT goodsid,price,goodsname,sum(quantity) as totalquantity
+        from cart
+        where status=1
+        group by goodsid
+    </select>
+
+    <update id="updateUG">
+        update cart
+       <set>
+           <if test="quantity!=null">
+           quantity=#{quantity}
+           </if>
+       </set>
+        where usersid=#{usersid} and goodsid=#{goodsid} and status = 0;
+    </update>
+    <update id="update">
+        update cart
+        <set>
+            <if test="quantity!=null">
+                quantity=#{quantity}
+            </if>
+        </set>
+        where id=#{id} and status=0;
+    </update>
+    <update id="purchase">
+        update cart
+        set status=1
+        where id=#{id}
+    </update>
+    <delete id="del">
+        delete from cart
+        <where>
+            id = #{id} and status = 0
+        </where>
+    </delete>
+<!--    <delete id="dels">-->
+<!--        delete from Goods-->
+<!--        <where>-->
+<!--            id in(-->
+<!--            <foreach collection="array" item="id" separator=",">-->
+<!--                #{id}-->
+<!--            </foreach>);-->
+<!--        </where>-->
+<!--    </delete>-->
+</mapper>

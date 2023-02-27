@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.demo.mapper.GoodsMapper">
+    <resultMap id="goodsmap" type="com.demo.pojo.Goods">
+        <result column="description" jdbcType="LONGVARCHAR" property="description" />
+    </resultMap>
+    <select id="selectAll" resultMap="goodsmap">
+        select * from goods;
+    </select>
+    <select id="selectById"  resultMap="goodsmap">
+        select * from goods where id =#{id};
+    </select>
+<!--    <select id="selectByCondition"  resultMap="goodsmap">-->
+<!--        SELECT * FROM Goods-->
+<!--        <where>-->
+<!--            <if test="name != null">-->
+<!--                name like #{name}-->
+<!--            </if>-->
+<!--            <if test="price != null">-->
+<!--                AND price like #{price}-->
+<!--            </if>-->
+<!--            <if test="id != null ">-->
+<!--                AND id like #{id}-->
+<!--            </if>-->
+<!--        </where>-->
+<!--    </select>-->
+    <select id="selectByCondition"  resultMap="goodsmap">
+        SELECT * FROM Goods
+        <where>
+
+            <if test="name != null">
+                name like concat('%',#{name},'%')
+            </if>
+<!--            <when test="price != null">-->
+<!--                AND price like #{price}-->
+<!--            </when>-->
+            <if test="id != 0">
+                AND id = #{id}
+            </if>
+
+        </where>
+    </select>
+    <select id="selectByName"  resultMap="goodsmap">
+        SELECT * FROM Goods
+        <where>
+            <choose>
+                <when test="name != null">
+                    name like concat('%',#{name},'%')
+                </when>
+                <!--            <when test="price != null">-->
+                <!--                AND price like #{price}-->
+
+            </choose>
+        </where>
+    </select>
+    <update id="update">
+        update Goods
+       <set>
+           <if test="name!=null">
+           name=#{name},
+           </if>
+           <if test="price!=null">
+               price=#{price},
+           </if>
+           <if test="description!=null">
+               description=#{description}
+           </if>
+       </set>
+        where id=#{id};
+    </update>
+    <delete id="del">
+        delete from Goods
+        <where>
+            id = #{id}
+        </where>
+    </delete>
+    <delete id="dels">
+        delete from Goods
+        <where>
+            id in(
+            <foreach collection="array" item="id" separator=",">
+                #{id}
+            </foreach>);
+        </where>
+    </delete>
+    <insert id="add" useGeneratedKeys="true" keyProperty="id">
+        insert into Goods(name,description,price)
+        values(#{name},#{description},#{price});
+    </insert>
+</mapper>

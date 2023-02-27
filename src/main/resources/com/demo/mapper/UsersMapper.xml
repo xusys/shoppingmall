@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.demo.mapper.UsersMapper">
+    <resultMap id="usermap" type="com.demo.pojo.Users"></resultMap>
+    <select id="selectAll" resultMap="usermap">
+        select * from users;
+    </select>
+    <select id="selectById"  resultMap="usermap">
+        select * from users where id =#{id};
+    </select>
+    <select id="selectByCondition"  resultMap="usermap">
+        select * from users where username = #{username} and password = #{password};
+    </select>
+<!--    <insert id="add" useGeneratedKeys="true" keyProperty="id">-->
+    <insert id="add" useGeneratedKeys="true" keyProperty="id">
+        insert into Users(username,password,email)
+        values(#{username},#{password},#{email});
+    </insert>
+</mapper>
