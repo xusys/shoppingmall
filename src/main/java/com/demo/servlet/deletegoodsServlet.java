@@ -25,7 +25,7 @@ this.doPost(request,response);
         int flag=goodsService.delete(goods);
         if(flag==1)
         {
-        request.getRequestDispatcher("/mall.jsp").forward(request,response);}
+        request.getRequestDispatcher("/mallServlet").forward(request,response);}
         else {
             response.setContentType("text/html;charset=utf-8");
             PrintWriter writer=response.getWriter();
