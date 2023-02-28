@@ -16,7 +16,7 @@
     </select>
 <!--    <insert id="add" useGeneratedKeys="true" keyProperty="id">-->
     <insert id="add" useGeneratedKeys="true" keyProperty="id">
-        insert into Users(username,password,email)
+        insert into users(username,password,email)
         values(#{username},#{password},#{email});
     </insert>
 </mapper>

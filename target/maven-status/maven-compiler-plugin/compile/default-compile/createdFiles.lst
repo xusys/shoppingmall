@@ -1,9 +1,7 @@
-com\demo\mybatisdemo.class
 com\demo\pojo\Goods.class
-com\demo\servlet\registerServlet.class
-com\demo\pojo\Users.class
-com\demo\servlettest.class
-com\demo\mapper\GoodsMapper.class
-com\demo\mapper\UsersMapper.class
 com\demo\servlet\loginservlet.class
 com\demo\util\SqlSessionFactoryUtils.class
+com\demo\servlet\registerServlet.class
+com\demo\mapper\UsersMapper.class
+com\demo\pojo\Users.class
+com\demo\mapper\GoodsMapper.class

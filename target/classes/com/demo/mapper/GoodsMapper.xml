@@ -27,7 +27,7 @@
 <!--        </where>-->
 <!--    </select>-->
     <select id="selectByCondition"  resultMap="goodsmap">
-        SELECT * FROM Goods
+        select * from goods
         <where>
 
             <if test="name != null">
@@ -43,7 +43,7 @@
         </where>
     </select>
     <select id="selectByName"  resultMap="goodsmap">
-        SELECT * FROM Goods
+        select * from goods
         <where>
             <choose>
                 <when test="name != null">
@@ -56,7 +56,7 @@
         </where>
     </select>
     <update id="update">
-        update Goods
+        update goods
        <set>
            <if test="name!=null">
            name=#{name},
@@ -71,13 +71,13 @@
         where id=#{id};
     </update>
     <delete id="del">
-        delete from Goods
+        delete from goods
         <where>
             id = #{id}
         </where>
     </delete>
     <delete id="dels">
-        delete from Goods
+        delete from goods
         <where>
             id in(
             <foreach collection="array" item="id" separator=",">
@@ -86,7 +86,7 @@
         </where>
     </delete>
     <insert id="add" useGeneratedKeys="true" keyProperty="id">
-        insert into Goods(name,description,price)
+        insert into goods(name,description,price)
         values(#{name},#{description},#{price});
     </insert>
 </mapper>
