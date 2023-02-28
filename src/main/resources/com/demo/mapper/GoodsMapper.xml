@@ -27,7 +27,7 @@
 <!--        </where>-->
 <!--    </select>-->
     <select id="selectByCondition"  resultMap="goodsmap">
-        SELECT * FROM goods
+        select * from goods
         <where>
 
             <if test="name != null">
@@ -43,7 +43,7 @@
         </where>
     </select>
     <select id="selectByName"  resultMap="goodsmap">
-        SELECT * FROM goods
+        select * from goods
         <where>
             <choose>
                 <when test="name != null">

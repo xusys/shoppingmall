@@ -32,7 +32,7 @@
 <!--        </where>-->
 <!--    </select>-->
     <select id="selectByCondition"  resultMap="cartmap">
-        SELECT * FROM Cart
+        select * from cart
         <where>
 
             <if test="usersid != 0">
@@ -45,7 +45,7 @@
         </where>
     </select>
     <select id="selectByUG" resultMap="cartmap">
-        SELECT * FROM Cart
+       select * from cart
         <where>
 
             <if test="usersid != 0">
@@ -58,16 +58,16 @@
         </where>
     </select>
     <select id="showhistory" resultMap="cartmap">
-        select * from Cart
+        select * from cart
         where status=1
     </select>
     <select id="showuserhistory"  resultMap="cartmap">
-        select * from Cart
+        select * from cart
         where status =1
         and usersid=#{usersid}
     </select>
     <select id="showgoodshistory" resultMap="cartmap">
-        SELECT goodsid,price,goodsname,sum(quantity) as totalquantity
+        select goodsid,price,goodsname,sum(quantity) as totalquantity
         from cart
         where status=1
         group by goodsid
