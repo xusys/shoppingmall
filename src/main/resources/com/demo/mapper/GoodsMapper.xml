@@ -35,7 +35,7 @@
             </if>
 <!--            <when test="price != null">-->
 <!--                AND price like #{price}-->
-<!--            </when>-->
+<!--             </when>-->
             <if test="id != 0">
                 AND id = #{id}
             </if>
