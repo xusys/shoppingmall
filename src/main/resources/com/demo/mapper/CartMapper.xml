@@ -39,7 +39,7 @@
                 usersid = #{usersid}
             </if>
 
-                and status =  0
+                and status = 0
 
 
         </where>
