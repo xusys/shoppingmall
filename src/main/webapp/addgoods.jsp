@@ -11,6 +11,7 @@
     <title>添加商品</title>
 </head>
 <body>
+
 <h3>添加商品</h3>
 <form action="/untitled1_war/addgoodsServlet" method="post">
     名字<input name="name"><br>
